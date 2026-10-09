@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>नवरात्रि 2026 · Jai Mata Di</title>
+<meta name="color-scheme" content="dark">
+<link href="https://fonts.googleapis.com/css2?family=Arya:wght@700&family=Baloo+2:wght@600;800&family=Gotu&family=Kalam:wght@400;700&family=Khand:wght@500;700&family=Rajdhani:wght@500;700&family=Rozha+One&family=Teko:wght@500;700&family=Yatra+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="navratri.css">
+</head><body>
+<canvas id="fx"></canvas>
+<header class="hero">
+<div class="garland" id="g"></div>
+<div>
+<div class="arch"><svg id="m" viewBox="-100 -100 200 200"></svg>
+<div class="in"><div class="sub">॥ जय माता दी ॥</div><h1>नवरात्रि</h1><div class="sub">नौ रातें · नौ रूप · एक शक्ति</div></div></div>
+<div id="cd" aria-live="polite"></div><div class="today" id="td"></div>
+</div></header>
+<main>
+<h2>नौ देवियाँ</h2><p class="lead">Tap a Devi to read her mantra.</p>
+<section class="grid" id="grid"></section>
+<h2>दीप जलाएँ</h2><p class="lead">Light a diya for each night.</p>
+<div class="diyas" id="dy"></div><div id="cnt"></div>
+<button class="jai" id="jai">जय माता दी 🙏</button>
+</main>
+<footer>शुभ नवरात्रि! May Maa Durga light up your home<br>Made by Storymint Studio</footer>
+<dialog id="dg"><h3 id="dn"></h3><p id="dd"></p><p class="mt" id="dm"></p><button onclick="dg.close()">Close</button></dialog>
+<script>
+const START=new Date('2026-10-11T00:00:00'); // edit if your calendar differs
+const D=[
+['शैलपुत्री','Arya','🐂','#ffffff','Daughter of the mountains','ॐ देवी शैलपुत्र्यै नमः','Pure strength, born of the Himalaya.'],
+['ब्रह्मचारिणी','Rozha One','📿','#ffd9a0','Devotion and penance','ॐ देवी ब्रह्मचारिण्यै नमः','Patience and discipline in quiet prayer.'],
+['चंद्रघंटा','Baloo 2','🔔','#ffd54a','Courage with grace','ॐ देवी चन्द्रघण्टायै नमः','A crescent bell that drives away fear.'],
+['कूष्माण्डा','Gotu','🌞','#ff9a3c','Creator of the cosmos','ॐ देवी कूष्माण्डायै नमः','Her smile brought light to the universe.'],
+['स्कंदमाता','Teko','🪷','#ff6fa0','Mother of Kartikeya','ॐ देवी स्कन्दमातायै नमः','Love that holds the child on her lap.'],
+['कात्यायनी','Khand','⚔️','#ff5a3c','The warrior Devi','ॐ देवी कात्यायन्यै नमः','Fierce protector who slays injustice.'],
+['कालरात्रि','Yatra One','🔥','#8fa8ff','Destroyer of darkness','ॐ देवी कालरात्र्यै नमः','Dark as night, kind to her devotees.'],
+['महागौरी','Rajdhani','🌸','#fff1f5','Radiant and serene','ॐ देवी महागौर्यै नमः','Brightness that washes away sorrow.'],
+['सिद्धिदात्री','Kalam','✨','#f6d27a','Giver of siddhis','ॐ देवी सिद्धिदात्र्यै नमः','Completion and blessing on the ninth night.']];
+const $=id=>document.getElementById(id),dg=$('dg');
+// garland
+const g=$('g');for(let x=0;x<innerWidth;x+=26){const i=document.createElement('i');i.style.left=x+'px';i.style.height=(40+Math.abs(Math.sin(x/90))*90)+'px';i.style.animationDelay=(-Math.random()*4)+'s';g.appendChild(i)}
+// mandala
+let s='';for(let r of [95,78,60]){for(let k=0;k<(r>70?24:16);k++){const n=r>70?24:16;s+=`<ellipse cx="0" cy="-${r-14}" rx="${r>70?5:7}" ry="${r>70?14:16}" fill="none" stroke="#f6d27a" stroke-opacity="${r>70?.55:.4}" transform="rotate(${k*360/n})"/>`}}
+s+='<circle r="98" fill="none" stroke="#ffb703" stroke-dasharray="1 5" stroke-width="3"/><circle r="52" fill="#4a040466" stroke="#f6d27a88"/>';$('m').innerHTML=s;
+// cards
+const getDay=()=>Math.floor((new Date()-START)/864e5)+1;
+D.forEach((d,i)=>{const c=document.createElement('article');c.className='card';c.tabIndex=0;c.style.setProperty('--c',d[3]);c.style.transitionDelay=(i%3)*.12+'s';
+c.innerHTML=`<div class="halo"><span>${d[2]}</span></div><div class="day">दिन ${i+1}</div><div class="nm" style="font-family:'${d[1]}'">माँ ${d[0]}</div><div class="fn">${d[1]}</div><div class="tg">${d[4]}</div>`;
+const open=()=>{$('dn').textContent='माँ '+d[0];$('dn').style.fontFamily=`'${d[1]}'`;$('dd').textContent=d[6];$('dm').textContent=d[5];dg.showModal()};
+c.onclick=open;c.onkeydown=e=>e.key=='Enter'&&open();$('grid').appendChild(c)});
+const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');o.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.card').forEach(c=>io.observe(c));
+dg.onclick=e=>e.target==dg&&dg.close();
+// countdown
+function tick(){const t=START-new Date(),day=getDay();
+document.querySelectorAll('.card').forEach((c,i)=>c.classList.toggle('now',day==i+1));
+if(day>=1&&day<=9){$('cd').innerHTML='';$('td').textContent=`आज नवरात्रि का दिन ${day} · माँ ${D[day-1][0]}`;return}
+if(day>9){$('cd').innerHTML='';$('td').textContent='Navratri has passed — see you next year, Maa!';return}
+const p=[['दिन',864e5],['घंटे',36e5],['मिनट',6e4],['सेकंड',1e3]];let r=t;
+$('cd').innerHTML=p.map(([l,v])=>{const n=Math.floor(r/v);r%=v;return`<div><b>${String(n).padStart(2,'0')}</b><span>${l}</span></div>`}).join('');
+$('td').textContent='Sharad Navratri begins 11 October 2026'}
+tick();setInterval(tick,1000);
+// diyas
+let lit=0;for(let i=1;i<=9;i++){const b=document.createElement('button');b.className='diya';b.setAttribute('aria-label','Diya '+i);b.onclick=()=>{b.classList.toggle('lit');lit=document.querySelectorAll('.diya.lit').length;$('cnt').textContent=lit==9?'सभी दीप जल उठे — शुभ नवरात्रि! 🪔':lit?lit+' / 9 diyas lit':''};$('dy').appendChild(b)}
+// jai
+$('jai').onclick=e=>{for(let i=0;i<5;i++){const p=document.createElement('div');p.className='pop';p.textContent=['🪷','जय माता दी','🌼','🔱','✨'][i];p.style.left=(e.clientX-30+(Math.random()-.5)*120)+'px';p.style.top=(e.clientY-20)+'px';p.style.animationDelay=i*.08+'s';document.body.appendChild(p);setTimeout(()=>p.remove(),1800)}};
+// embers
+const cv=$('fx'),x=cv.getContext('2d');let W,H,P=[];const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};rs();addEventListener('resize',rs);
+for(let i=0;i<55;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.2+.6,v:Math.random()*.6+.2,d:Math.random()*6});
+(function f(t){x.clearRect(0,0,W,H);P.forEach(p=>{p.y-=p.v;p.x+=Math.sin(t/900+p.d)*.4;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}x.fillStyle=`rgba(255,${170+p.d*10|0},60,${.35+Math.sin(t/400+p.d)*.25})`;x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill()});requestAnimationFrame(f)})(0);
+</script></body></html> 

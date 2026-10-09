@@ -1,0 +1,58 @@
+:root{--maroon:#4a0404;--red:#b3180c;--gold:#f6d27a;--marigold:#ffb703;--saffron:#fb8500;--lotus:#e8467c;--cream:#fff3dc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:inherit;margin:0}
+html{scroll-behavior:smooth;height:100%}
+body{background:radial-gradient(ellipse at 50% 0,#c4200f 0,var(--red) 25%,var(--maroon) 70%,#2a0202);background-attachment:fixed;color:var(--cream);font-family:'Baloo 2',sans-serif;overflow-x:hidden;min-height:100%}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:0}
+main,header,footer{position:relative;z-index:1}
+.garland{position:absolute;top:0;left:0;right:0;height:150px;overflow:hidden;pointer-events:none;z-index:3}
+.garland i{position:absolute;top:-6px;width:20px;transform-origin:top;animation:sway 4s ease-in-out infinite alternate;background:radial-gradient(circle at 50% 10px,var(--saffron) 6px,var(--marigold) 7px 9px,transparent 10px) 0 0/20px 22px repeat-y}
+@keyframes sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:90px 20px 50px}
+.arch{position:relative;width:min(88vw,520px);aspect-ratio:1}
+.arch svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 90s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.arch .in{position:absolute;inset:0;display:grid;place-content:center;gap:6px}
+h1{font:400 clamp(3.4rem,17vw,6.8rem)/1.05 'Rozha One',serif;background:linear-gradient(180deg,#fff6cf,var(--gold) 50%,#c98a1c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 18px #ff9a0066);animation:rise 1.6s cubic-bezier(.2,.8,.2,1) both,glow 4s 1.6s ease-in-out infinite alternate}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.9);letter-spacing:.2em}}
+@keyframes glow{to{filter:drop-shadow(0 4px 30px #ffb703aa)}}
+.sub{font:400 1.25rem 'Kalam',cursive;color:var(--gold);animation:rise 1.6s .4s both}
+#cd{display:flex;gap:10px;justify-content:center;margin-top:26px;animation:rise 1.6s .7s both}
+#cd div{min-width:68px;padding:10px 6px;border:1px solid #f6d27a88;border-radius:14px 14px 28px 28px;background:#2a020266;backdrop-filter:blur(6px)}
+#cd b{display:block;font:700 2rem/1 'Teko',sans-serif;color:var(--gold)}
+#cd span{font:500 .8rem 'Rajdhani',sans-serif}
+.today{margin-top:14px;font:700 1.1rem 'Rajdhani',sans-serif;color:var(--marigold)}
+h2{font:400 clamp(2rem,8vw,3.2rem) 'Yatra One',serif;color:var(--gold);text-align:center;padding:50px 16px 8px}
+.lead{text-align:center;font:400 1.1rem 'Kalam',cursive;opacity:.85;padding:0 20px 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;max-width:1080px;margin:auto;padding:10px 18px 30px}
+.card{--c:#f6d27a;position:relative;padding:26px 18px 22px;text-align:center;cursor:pointer;border:1.5px solid color-mix(in srgb,var(--c) 55%,transparent);border-radius:120px 120px 22px 22px;background:linear-gradient(180deg,#00000040,#2a020299);opacity:0;transform:translateY(60px) scale(.94);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s}
+.card.on{opacity:1;transform:none}
+.card:hover,.card:focus-visible{transform:translateY(-8px) scale(1.02);box-shadow:0 18px 50px color-mix(in srgb,var(--c) 40%,transparent);border-color:var(--c);outline:none}
+.halo{width:96px;height:96px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;font-size:3rem;background:radial-gradient(circle,color-mix(in srgb,var(--c) 45%,#fff0) 0,transparent 70%);border:2px dotted var(--c);animation:spin 18s linear infinite}
+.halo span{animation:spin 18s linear infinite reverse}
+.card.now{box-shadow:0 0 0 3px var(--marigold),0 0 60px #ffb70088}
+.day{font:500 1rem 'Rajdhani',sans-serif;color:var(--c)}
+.nm{font-size:2.3rem;line-height:1.25;color:var(--gold);margin:4px 0}
+.fn{font:500 .85rem 'Rajdhani',sans-serif;opacity:.6}
+.tg{margin-top:8px;font:400 1rem 'Kalam',cursive}
+.diyas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;padding:10px 20px 24px}
+.diya{width:54px;height:60px;background:none;border:0;cursor:pointer;position:relative}
+.diya:focus-visible{outline:2px solid var(--gold);border-radius:12px}
+.diya:before{content:"";position:absolute;left:4px;right:4px;bottom:2px;height:24px;border-radius:2px 2px 30px 30px;background:linear-gradient(#e07b1a,#7a3200)}
+.diya:after{content:"";position:absolute;left:23px;bottom:24px;width:9px;height:24px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;background:linear-gradient(#fff,#ffd54a 40%,#ff7a00);opacity:0;transform:scale(0);transform-origin:bottom;transition:.5s cubic-bezier(.3,1.6,.5,1);box-shadow:0 0 30px 14px #ffb70088}
+.diya.lit:after{opacity:1;transform:scale(1);animation:flick .15s infinite alternate}
+@keyframes flick{to{transform:scale(1.06,.94) rotate(2deg)}}
+#cnt{text-align:center;font:700 1.3rem 'Rajdhani',sans-serif;color:var(--gold);min-height:2em}
+.jai{display:block;margin:6px auto 40px;padding:14px 34px;border:0;border-radius:40px;font:800 1.4rem 'Baloo 2',sans-serif;color:#4a0404;background:linear-gradient(90deg,var(--marigold),#ffe08a,var(--marigold));background-size:200%;animation:shine 3s linear infinite;cursor:pointer;transition:transform .2s}
+.jai:active{transform:scale(.92)}
+@keyframes shine{to{background-position:200%}}
+.pop{position:fixed;font:400 1.6rem 'Rozha One',serif;color:var(--gold);pointer-events:none;z-index:9;animation:up 1.4s forwards}
+@keyframes up{to{transform:translateY(-140px);opacity:0}}
+dialog{border:1.5px solid var(--gold);border-radius:28px;background:linear-gradient(#5a0808,#2a0202);color:var(--cream);padding:30px 26px;max-width:min(92vw,420px);text-align:center;margin:auto}
+dialog::backdrop{background:#000a;backdrop-filter:blur(4px)}
+dialog[open]{animation:rise .6s both}
+dialog h3{font-size:2.6rem;color:var(--gold);font-weight:400}
+dialog p{margin:10px 0;font:400 1.1rem 'Kalam',cursive}
+dialog .mt{font:400 1.5rem 'Yatra One',serif;color:var(--marigold)}
+dialog button{margin-top:12px;padding:8px 22px;border-radius:20px;border:1px solid var(--gold);background:none;color:var(--gold);font:700 1rem 'Rajdhani',sans-serif;cursor:pointer}
+footer{text-align:center;padding:30px 20px 50px;font:400 1.2rem 'Kalam',cursive;color:var(--gold)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
